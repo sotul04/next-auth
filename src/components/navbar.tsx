@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { House } from "lucide-react";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
