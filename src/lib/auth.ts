@@ -26,7 +26,6 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, _) {
-                console.log("Try to login");
                 if (!credentials?.email || !credentials?.password) {
                     return null;
                 }
@@ -37,18 +36,15 @@ export const authOptions: NextAuthOptions = {
                     }
                 });
                 if (!existingUser) {
-                    console.log("User not found");
                     return null;
                 }
 
                 const passwordMatch = await compare(credentials.password, existingUser.password);
 
                 if (!passwordMatch) {
-                    console.log("Password is not match");
                     return null;
                 }
 
-                console.log("Login");
                 return {
                     id: `${existingUser.id}`,
                     username: existingUser.username,
@@ -59,7 +55,6 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async session({ session, token }) {
-            console.log(token, session);
             return {
                 ...session,
                 user: {
@@ -69,7 +64,6 @@ export const authOptions: NextAuthOptions = {
             }
         },
         async jwt({ token, user }) {
-            console.log(token, user);
             if (user) {
                 return {
                     ...token,
